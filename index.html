@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lainchan</title>
+    <link rel="icon" type="image/png" href="assets/images/favico.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loader" style="display: none;">
+        <div class="loading-text">Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></div>
+        <div class="loading-bar-background">
+            <div class="loading-bar">
+                <div class="white-bars-container">
+                    <div class="white-bar"></div>
+                    <div class="white-bar"></div>
+                    <div class="white-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header fixed-top">
+        <div class="container d-flex justify-content-center align-items-center">
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.nicepng.com%2Fpng%2Ffull%2F132-1323846_anime-pngs.png&f=1&nofb=1&ipt=9905b8b016bea5902fb82e7ca361088bf972cf5bc6a8c038b15bbad075f58e38" alt="Lainchan Logo" class="header-logo">
+            <h1 class="header-title">Lainchan</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Board Selector -->
+        <select id="boardSelect" class="form-select mb-3" onchange="loadThreads()" title="Select a board to view threads" aria-label="Select a board">
+            <option value="" disabled selected>Select a Board</option>
+            <option value="tech">Technology</option>
+            <option value="diy">DIY</option>
+            <option value="sec">Security</option>
+        </select>
+
+        <!-- Thread List -->
+        <div id="postsContainer" class="row"></div>
+
+        <!-- Thread View -->
+        <div id="threadView" class="d-none">
+            <button class="btn btn-back mb-3" onclick="goBackToThreads()" aria-label="Back to threads">Back to Threads</button>
+            <h2 id="threadTitle" class="thread-title text-center"></h2>
+            <div id="threadMessages" class="messages"></div>
+        </div>
+
+        <!-- Image Modal -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img id="modalImage" src="" alt="Full-size image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.5/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
