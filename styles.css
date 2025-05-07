@@ -275,7 +275,7 @@ body {
 /* Messages (Messenger-Inspired) */
 .messages {
     padding: 1rem;
-    background: #1a2634;
+    background: #2a3b4c;
     overflow-y: auto;
     max-height: 80vh;
     -ms-overflow-style: none;
