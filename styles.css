@@ -231,7 +231,7 @@ body {
 
 /* Image Modal */
 .modal-content {
-    background-color: #1a2634;
+    background-color: #c8def7;
     border: none;
 }
 
@@ -304,7 +304,7 @@ body {
     padding: 0.5rem 1rem;
     margin: 0.5rem 1rem;
     border-radius: 1.125rem 1.125rem 1.125rem 0;
-    background: #344f6e;
+    background: #3d5e85;
     color: #ffffff;
     max-width: 66%;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1), 0 1rem 1rem -0.5rem rgba(0, 0, 0, 0.2);
@@ -312,7 +312,7 @@ body {
 }
 
 .yours .message {
-    background: #1f2e42;
+    background: #b5e2f5;
     border-radius: 1.125rem 1.125rem 1.125rem 0;
 }
 
