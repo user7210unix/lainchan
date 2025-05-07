@@ -277,7 +277,7 @@ body {
     padding: 1rem;
     background: #1a2634;
     overflow-y: auto;
-    max-height: 70vh;
+    max-height: 80vh;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
@@ -445,7 +445,7 @@ body {
     }
 
     .messages {
-        max-height: 60vh;
+        max-height: 90vh;
     }
 
     .image-preview img {
