@@ -10,7 +10,7 @@ let lastScrollTop = 0;
 window.addEventListener('scroll', () => {
     const header = document.querySelector('.header');
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    if (currentScroll > lastScrollTop && currentScroll > 100) {
+    if (currentScroll > lastScrollTop && currentScroll > 50) {
         header.classList.add('hidden');
     } else {
         header.classList.remove('hidden');
@@ -129,8 +129,10 @@ async function loadThreads() {
     if (!board) return;
     const postsContainer = document.getElementById('postsContainer');
     const threadView = document.getElementById('threadView');
+    const backButton = document.getElementById('backButton');
     postsContainer.classList.remove('d-none');
     threadView.classList.add('d-none');
+    backButton.classList.add('d-none');
     postsContainer.innerHTML = '<p>Loading...</p>';
 
     const retryButton = document.createElement('button');
@@ -192,9 +194,11 @@ async function loadThreadDetails(board, threadNo) {
     const threadView = document.getElementById('threadView');
     const threadMessages = document.getElementById('threadMessages');
     const threadTitle = document.getElementById('threadTitle');
+    const backButton = document.getElementById('backButton');
 
     postsContainer.classList.add('d-none');
     threadView.classList.remove('d-none');
+    backButton.classList.remove('d-none');
     threadMessages.innerHTML = '<p>Loading...</p>';
 
     const retryButton = document.createElement('button');
@@ -250,17 +254,34 @@ function createMessage(post, board, isOP) {
     message.className = 'message';
 
     let comment = DOMPurify.sanitize(post.com || 'No comment');
+    let replyLinks = '';
     comment = comment.replace(/^>.*$/gm, match => `<span class="greentext">${match}</span>`);
     comment = comment.replace(/>>([0-9]+)/g, (match, postNo) => {
-        return `<span class="reply-link" onclick="scrollToPost(${postNo})">>>${postNo}</span>`;
+        replyLinks += `<span class="reply-link" onclick="scrollToPost(${postNo})">>>${postNo}</span> `;
+        return '';
     });
 
+    // Format timestamp (assuming post.time is a Unix timestamp in seconds)
+    const timestamp = post.time ? new Date(post.time * 1000).toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+    }) : 'Unknown time';
+    const userId = post.id || 'Anonymous';
+
     message.innerHTML = `
+        <div class="message-header">
+            ${replyLinks}
+            <span class="post-no">Post #${post.no}</span>
+            <span class="post-user">${userId}</span>
+            <span class="post-time">${timestamp}</span>
+        </div>
         ${post.tim ? `
             <img src="${baseUrl}/${board}/src/${post.tim}${post.ext}" alt="Post image" aria-label="Click to view full-size image">
         ` : ''}
         <p>${comment}</p>
-        <p class="post-no">Post #${post.no}</p>
     `;
 
     messageContainer.appendChild(message);
@@ -279,8 +300,10 @@ function scrollToPost(postNo) {
 function goBackToThreads() {
     const postsContainer = document.getElementById('postsContainer');
     const threadView = document.getElementById('threadView');
+    const backButton = document.getElementById('backButton');
     postsContainer.classList.remove('d-none');
     threadView.classList.add('d-none');
+    backButton.classList.add('d-none');
 }
 
 function truncateComment(comment, maxLength) {
